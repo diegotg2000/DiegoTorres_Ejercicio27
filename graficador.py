@@ -11,9 +11,9 @@ for i in range(101):
     Z[i,:]=vec[i*101:(i+1)*101]
     
 X=np.array(range(101))/101
-Y=X
+Y=-X
 X,Y=np.meshgrid(X,Y)
 fig=plt.figure()
 ax=Axes3D(fig)
 ax.plot_wireframe(X,Y,Z, color='r')
-plt.savefig('graficas.png')
+plt.show()

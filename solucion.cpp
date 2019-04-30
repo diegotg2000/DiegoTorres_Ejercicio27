@@ -19,17 +19,28 @@ int main(){
 }
 
 void solucion(void){
-    float V[N][N]={0};
+    float Vnew[N][N]={0};
+    float Vold[N][N]={0};
+    
     for(int j=20;j<=80;j++){
-        V[40][j]=V0;
-        V[60][j]=-V0;
+        Vold[40][j]=V0;
+        Vold[60][j]=-V0;
+    }
+    for(int j=20;j<=80;j++){
+        Vnew[40][j]=V0;
+        Vnew[60][j]=-V0;
     }
     for(int m=0; m<intentos;m++){
         for(int i=1; i<N-1;i++){
             for(int j=1;j<N-1;j++){
-                if(i!=40 && i!=60 && j>80 && j<20){
-                V[i][j]=0.25*(V[i-1][j]+V[i+1][j]+V[i][j-1]+V[i][j+1]);
+                if((i!=40 && i!=60)|| (j>80 && j<20)){
+                Vnew[i][j]=0.25*(Vold[i-1][j]+Vold[i+1][j]+Vold[i][j-1]+Vold[i][j+1]);
                 }
+            }
+        }
+        for(int i=1; i<N-1;i++){
+            for(int j=1;j<N-1;j++){
+                Vold[i][j]=Vnew[i][j];
             }
         }
     }
@@ -39,7 +50,7 @@ void solucion(void){
   outfile.open("datos.txt");
   for(int i=0; i<N;i++){
         for(int j=0;j<N;j++){
-                outfile<<V[i][j]<<endl;
+                outfile<<Vnew[i][j]<<endl;
         }
   }
 
